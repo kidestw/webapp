@@ -3,8 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 from azure.storage.blob import BlobServiceClient, ContentSettings
 from io import BytesIO
 from urllib.parse import quote as url_quote
-
-
+import requests
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "supersecretkey")
@@ -16,17 +15,30 @@ TRANSLATED_CONTAINER = "translated-documents"
 
 blob_service_client = BlobServiceClient.from_connection_string(STORAGE_CONNECTION_STRING)
 
-LANGUAGES = {
-    "en": "English",
-    "fr": "French",
-    "de": "German",
-    "es": "Spanish",
-    "it": "Italian",
-    "am": "Amharic",
-}
+def get_supported_languages():
+    """Fetch supported languages from Azure Translator API."""
+    url = "https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        return {code: info['name'] for code, info in data['translation'].items()}
+    except Exception as e:
+        # Fallback to common languages if API fails
+        flash(f"Could not fetch language list: {str(e)}", "warning")
+        return {
+            "en": "English",
+            "fr": "French",
+            "de": "German",
+            "es": "Spanish",
+            "it": "Italian",
+            "am": "Amharic",
+        }
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    LANGUAGES = get_supported_languages()
+
     if request.method == "POST":
         uploaded_file = request.files.get("file")
         target_lang = request.form.get("language")
