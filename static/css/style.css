@@ -1,12 +1,69 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
 }
 
-.card {
-  border-radius: 12px;
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-brand::before {
+  content: "🌍";
+}
+
+.card {
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h4::before {
+  content: "📄 ";
+}
+
+.btn-primary {
+  background-color: #0066cc;
+  border-color: #005bb5;
+}
+
+.btn-primary:hover {
+  background-color: #005bb5;
+}
+
+.btn-outline-success::before {
+  content: "⬇️ ";
+}
+
+.alert-success::before {
+  content: "✅ ";
+  margin-right: 0.5rem;
+}
+
+.alert-danger::before {
+  content: "❌ ";
+  margin-right: 0.5rem;
+}
+
+select,
+input[type="file"] {
+  border-radius: 8px;
+}
+
+ul.list-group li {
+  background-color: #f9f9f9;
+  border: none;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
