@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Document Translator - Nedamco Africa</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document Translator - Nedamco Africa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
 </head>
 <body class="bg-light">
+
+<!-- Theme Toggle -->
+<div class="theme-toggle">
+  <label class="toggle-switch">
+    <input type="checkbox" id="themeToggle" />
+    <span class="slider"></span>
+  </label>
+</div>
+
+<!-- Caption -->
+<div class="caption-header">
+  🌍 Translate your documents on the go — Powered by AI 📄✨
+</div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
   <div class="container">
@@ -54,7 +67,7 @@
     </div>
   </div>
 
-  <div class="card shadow-sm">
+  <div class="card mt-5 shadow-sm">
     <div class="card-header bg-success text-white">
       <h4 class="mb-0">Translated Documents</h4>
     </div>
@@ -78,5 +91,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleSwitch = document.getElementById("themeToggle");
+    toggleSwitch.addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  });
+</script>
 </body>
 </html>
