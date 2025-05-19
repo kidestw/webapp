@@ -1,54 +1,68 @@
-:root[data-theme="light"] {
-  --bg-body: #ffffff;
-  --bg-card: #f8f9fa;
-  --text-color: #000000;
-  --hero-bg: url("https://images.unsplash.com/photo-1581093458791-9caa0a465b3c?auto=format&fit=crop&w=1500&q=80");
-}
-
-:root[data-theme="dark"] {
-  --bg-body: #121212;
-  --bg-card: #1f1f1f;
-  --text-color: #ffffff;
-  --hero-bg: url("https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1500&q=80");
-}
-
 body {
-  background-color: var(--bg-body);
-  color: var(--text-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url("https://www.rws.com/media/images/Demystifying_tcm228-224175.png") no-repeat center center fixed;
+  background-size: cover;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.main-content {
+  margin-top: -30px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 
 .card {
-  background-color: var(--bg-card);
   border-radius: 12px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 2rem;
 }
 
-.navbar {
-  transition: background-color 0.3s ease;
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
-.hero-section {
-  background-image: var(--hero-bg);
-  background-size: cover;
-  background-position: center;
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+.header-section {
+  background-color: rgba(0,0,0,0.55);
+  border-radius: 12px;
+  margin: 1rem 2rem 2rem;
+  padding: 2rem;
+  color: #fff;
 }
 
-.hero-section h1,
-.hero-section p {
-  color: white;
+.caption-text {
+  color: #f8f9fa;
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.7);
 }
 
-.form-card, .result-card {
-  margin-top: 2rem;
+.dark-mode {
+  background-color: #1f1f1f !important;
+  color: #f1f1f1;
 }
 
-.alert {
-  border-radius: 10px;
+.dark-mode .main-content {
+  background-color: rgba(34, 34, 34, 0.9);
+  color: #f1f1f1;
+}
+
+.dark-mode .card {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+}
+
+.dark-mode .header-section {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.btn {
+  transition: all 0.3s ease;
 }
