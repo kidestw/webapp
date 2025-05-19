@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,54 +7,47 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
 </head>
-<body class="bg-light">
+<body>
 
-<!-- Theme Toggle -->
-<div class="theme-toggle">
-  <label class="toggle-switch">
-    <input type="checkbox" id="themeToggle" />
-    <span class="slider"></span>
-  </label>
-</div>
-
-<!-- Caption -->
-<div class="caption-header">
-  🌍 Translate your documents on the go — Powered by AI 📄✨
-</div>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
   <div class="container">
-    <a class="navbar-brand" href="/">Nedamco Translator</a>
+    <a class="navbar-brand" href="/">🌍 Nedamco Translator</a>
+    <button class="btn btn-sm btn-light" id="theme-toggle">🌙 Toggle Theme</button>
   </div>
 </nav>
 
-<div class="container">
+<header class="text-center text-white hero-section">
+  <div class="container py-5">
+    <h1 class="display-4 fw-bold">Translate your documents on the go 🌐</h1>
+    <p class="lead">AI-powered translation with just a few clicks!</p>
+  </div>
+</header>
+
+<div class="container my-5">
 
   {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div>
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-    </div>
-  {% endif %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
   {% endwith %}
 
-  <div class="card mb-4 shadow-sm">
+  <div class="card mb-4 shadow form-card">
     <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Upload Document for Translation</h4>
+      <h4>📄 Upload Document for Translation</h4>
     </div>
     <div class="card-body">
-      <form method="POST" enctype="multipart/form-data" id="uploadForm">
+      <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
-          <label for="file" class="form-label">Select document file</label>
+          <label for="file" class="form-label">Select a document file</label>
           <input class="form-control" type="file" id="file" name="file" required />
         </div>
         <div class="mb-3">
-          <label for="language" class="form-label">Select Target Language</label>
+          <label for="language" class="form-label">Select Target Language 🌐</label>
           <select class="form-select" id="language" name="language" required>
             <option value="" selected disabled>Select language</option>
             {% for code, name in languages.items() %}
@@ -62,14 +55,14 @@
             {% endfor %}
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Upload & Translate</button>
+        <button type="submit" class="btn btn-primary w-100">🚀 Upload & Translate</button>
       </form>
     </div>
   </div>
 
-  <div class="card mt-5 shadow-sm">
+  <div class="card shadow result-card mt-5">
     <div class="card-header bg-success text-white">
-      <h4 class="mb-0">Translated Documents</h4>
+      <h4>📥 Translated Documents</h4>
     </div>
     <div class="card-body">
       {% if translated_files %}
@@ -77,7 +70,7 @@
           {% for file in translated_files %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
               {{ file }}
-              <a href="{{ url_for('download_file', filename=file) }}" class="btn btn-sm btn-outline-success">Download</a>
+              <a href="{{ url_for('download_file', filename=file) }}" class="btn btn-sm btn-outline-success">⬇️ Download</a>
             </li>
           {% endfor %}
         </ul>
@@ -89,15 +82,15 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggleSwitch = document.getElementById("themeToggle");
-    toggleSwitch.addEventListener("change", () => {
-      document.body.classList.toggle("dark-mode");
-    });
+  const toggle = document.getElementById('theme-toggle');
+  toggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
   });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
